@@ -54,7 +54,11 @@
         }
       }
       const sketchCode = sketchData.versions[0].codeObjects[0].code;
-      runSketch(sketchCode);
+      const permission = await DeviceMotionEvent.requestPermission();
+      if (permission === 'granted') {
+        runSketch(sketchCode);
+
+      }
     });
 
     function runSketch(code) {
