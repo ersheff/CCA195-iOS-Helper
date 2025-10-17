@@ -30,7 +30,7 @@
   <script>
     document.querySelector('dialog').showModal();
     document.querySelector('form').addEventListener('submit', async e => {
-      const permission = await DeviceMotionEvent.requestPermission();
+      await DeviceMotionEvent.requestPermission();
       const formData = new FormData(e.target);
       const sketchId = formData.get('sketchId');
       const response = await fetch(`https://openprocessing.org/sketch/${sketchId}`);
@@ -48,9 +48,7 @@
         }
       }
       const sketchCode = sketchData.versions[0].codeObjects[0].code;
-      if (permission === 'granted') {
-        runSketch(sketchCode);
-      }
+      runSketch(sketchCode);
     });
 
     function runSketch(code) {
