@@ -1,1 +1,3 @@
-# iOS p5 Fix
+# CPA 195 iOS Loader
+
+Works with Open Processing.
