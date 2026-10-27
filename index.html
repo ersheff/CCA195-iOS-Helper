@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -10,4 +10,34 @@
     <script type="module" src="script.js"></script>
 
 </body>
-</html>
+</html>-->
+<button id="motion">Enable motion</button>
+<pre id="output">Waiting for permission...</pre>
+
+<script>
+  const output = document.querySelector("#output");
+
+  document.querySelector("#motion").onclick = async () => {
+    try {
+      if (typeof DeviceMotionEvent.requestPermission === "function") {
+        const result = await DeviceMotionEvent.requestPermission();
+
+        if (result !== "granted") {
+          output.textContent = "Permission denied";
+          return;
+        }
+      }
+
+      window.addEventListener("devicemotion", event => {
+        output.textContent = JSON.stringify({
+          acceleration: event.accelerationIncludingGravity,
+          rotationRate: event.rotationRate
+        }, null, 2);
+      });
+
+      output.textContent = "Permission granted; waiting for events...";
+    } catch (error) {
+      output.textContent = error.toString();
+    }
+  };
+</script>
