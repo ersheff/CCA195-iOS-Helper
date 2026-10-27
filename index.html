@@ -13,6 +13,7 @@
 </html>-->
 <button id="motion">Enable motion</button>
 <pre id="output">Waiting for permission...</pre>
+<iframe src="" frameborder="0" style="width: 100%; height: 100vh;"></iframe>
 
 <script>
   const output = document.querySelector("#output");
@@ -26,6 +27,7 @@
           output.textContent = "Permission denied";
           return;
         }
+
       }
 
       window.addEventListener("devicemotion", event => {
@@ -36,6 +38,8 @@
       });
 
       output.textContent = "Permission granted; waiting for events...";
+      document.querySelector("iframe").src = "https://editor.p5js.org/ersheff/full/57qJh0loC";
+
     } catch (error) {
       output.textContent = error.toString();
     }
